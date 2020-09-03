@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Euroconversor</title>
+<script type="text/javascript" language="javascript">
+	var op=prompt("Elija una opción (1 convertir a euros, 2 convertir a pesetas)","1");
+	if (op == 1){
+		var cantidad=prompt("Introduzca cantidad en pesetas","0");
+		var res=parseFloat(cantidad)/166.386;
+		document.write(cantidad+" ptas = "+res+" &euro;");
+	}
+	else if (op == 2){
+		var cantidad=prompt("Introduzca cantidad en euros","0");
+		var res=parseFloat(cantidad)*166.386;
+		document.write(cantidad+" &euro; = "+res+" ptas");
+	}
+	else{
+		alert("Error, opción incorrecta");
+	}
+</script>
+</head>
+
+<body>
+</body>
+</html>
