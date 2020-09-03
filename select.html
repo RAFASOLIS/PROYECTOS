@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+<script type="text/javascript">
+
+var ciudades = [[],["Malaga", "Sevilla", "Huelva", "Cadiz", "Almería", "Granada", "Jaen"], ["Asturias"], ["Barcelona", "Gerona", "Lerida", "Tarragona"], ["Caceres", "Badajoz"], ["Madrid"]];
+
+window.onload = function () {
+
+	var comunidad = document.getElementById("comunidad");
+	
+	comunidad.onchange = function () {
+	
+		var provincia = document.getElementById("provincia");
+		var cont;
+		var ciudad;
+		
+		provincia.length = 0;
+		for (cont = 0; cont < ciudades[comunidad.selectedIndex].length; cont++) {
+		
+			ciudad = ciudades[comunidad.selectedIndex][cont];
+			provincia.options[provincia.options.length] = new Option(ciudad, cont);
+
+		}
+	
+	}
+	
+
+}
+
+</script>
+</head>
+
+<body>
+
+<select  id="comunidad">
+	<option value="0">Seleccione Comunidad</option>
+    <option value="1">Andalucia</option>
+    <option value="2">Asturias</option>
+    <option value="3">Cataluña</option>
+    <option value="4">Extremadura </option>
+    <option value="5">Madrid</option>
+</select>
+<select  id="provincia">
+	
+</select>
+</body>
+</html>
