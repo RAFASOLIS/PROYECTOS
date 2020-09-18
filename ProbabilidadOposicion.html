@@ -1,0 +1,129 @@
+
+<html>
+<head>
+<title>Cálculo probabilidad oposiciones </title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+
+<script>
+
+function capturar(){
+var t,e,ex;
+var rdo;
+t=document.getElementById("idTotal").value;
+e=document.getElementById("idEst").value;
+ex=document.getElementById("idEx").value;
+rdo=1;
+
+for(i=0;i<ex;i++){rdo=rdo*(t-e-i)/(t-i);}
+document.getElementById("idNest").value=((1-rdo).toFixed(6))*100 + "%";
+}
+
+
+function listar(){
+var t,e,ex;
+var rdo;
+t=document.getElementById("idTotal").value;
+ex=document.getElementById("idEx").value;
+document.getElementById("lista").innerHTML="<b><u>Probabilidad según nº temas estudiados:</u></b></br>";
+for(e=0;e<=t;e++){
+rdo=1;
+for(i=0;i<ex;i++){rdo=rdo*((t-e-i)/(t-i));}
+
+
+document.getElementById("lista").innerHTML+=(e) + "   tema/s estudiado/s:     " + ((1-rdo)*100).toFixed(2) + "% </br>";	
+
+}
+
+}
+
+function pintar(){
+google.charts.load('current', {'packages':['corechart']});
+
+t=document.getElementById("idTotal").value;
+ex=document.getElementById("idEx").value;
+var tem=new Array(t);
+var prob=new Array(t);
+
+
+for(e=0;e<t;e++){
+rdo=1;
+for(i=0;i<ex;i++){rdo=rdo*((t-e-i)/(t-i));}
+tem[e]=e;
+prob[e]=(1-rdo);
+
+}
+
+
+var datos = new google.visualization.DataTable();
+datos.addColumn('number','T');
+datos.addColumn('number','P');
+for(j=0;j<tprob.length;j++){datos.addRow([tem[j],prob[j]]);}
+
+
+
+
+var options = { title: 'Probabilidad según nº temas estudiados',curveType: 'function',legend: { position: 'bottom' }}
+var chart = new google.visualization.LineChart(document.getElementById('grafica'));
+chart.draw(datos, options);
+
+
+}
+
+
+function p(t,e,ex){
+rdo=1;
+
+for(i=0;i<ex;i++){rdo=rdo*((t-e-i)/(t-i))}
+return (1-rdo)
+}
+function graficar() {
+google.charts.load('current', {'packages':['corechart']});
+n=document.getElementById("idTotal").value;
+ex=document.getElementById("idEx").value;
+var n =10;
+var vx=new Array(n);
+var vy=new Array(n);
+for(e=0;e<n;e++){
+
+vx[e]=e;
+vy[e]=p(n,e,ex);
+
+}
+
+
+
+var data = new google.visualization.DataTable();
+  data.addColumn('number', 'Nº temas estudiados');
+  data.addColumn('number', 'Probabilidad');
+
+  for(i = 0; i < vx.length; i++){
+
+    data.addRow([vx[i], vy[i]]);}
+
+
+var options = {  title: 'Probabilidad según Nº temas estudiados', curveType: 'function', legend: { position: 'bottom' }};
+var chart = new google.visualization.LineChart(document.getElementById('grafica'));
+chart.draw(data, options);
+}
+</script>
+</head>
+<body>
+<h4>CÁLCULO PROBABILIDAD CAÍDA TEMA ESTUDIADO</h4>
+<form name="Entradas">
+Total:<input type="text" name="tbTotal" id="idTotal"/></br>
+Estudiados:<input type="text" name="tbEst" id="idEst"/></br>
+Extracciones:<input type="text" name="tbEx" id="idEx"/></br>
+Prob. al menos 1 estudiado:<input type="text" name="tbNEst" id="idNest"/></br>
+<input type="button" name="btCalcular" value="Calcular" onClick="capturar();"/>
+<input type="button" name="btCalcularLista" value="Generar tabla" onClick="listar();"/>
+<input type="button" name="btGraficar" value="Generar gráfica" onClick="graficar();"/>
+</form>
+
+<div id="grafica" style="height: 250px;"></div>
+<div id="lista"></div>
+
+</body>
+<footer> &copy;Rafael Solís López</footer>
+<html>
+
